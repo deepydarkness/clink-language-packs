@@ -1,0 +1,321 @@
+Abra De Ilog
+Alfonso Castaneda
+Alfonso Lista
+Angeles City
+Bacolod City
+Bacoor City
+Bago City
+Baguio City
+Bais City
+Batangas City
+Benito Soliven
+Bien Unido
+Barotac Nuevo
+Barotac Viejo
+Braulio E. Dujali
+Brooke's Point
+Butuan City
+Cabanatuan City
+Cagayan De Oro City
+Calbayog City
+Caloocan City
+Canlaon City
+Cavite City
+Cebu City
+City Of Alaminos
+City Of Antipolo
+City Of Balanga
+City Of Batac
+City Of Bayawan
+City Of Baybay
+City Of Bayugan
+City Of Bislig
+City Of Biñan
+City Of Bogo
+City Of Borongan
+City Of Cabadbaran
+City Of Calamba
+City Of Calapan
+City Of Candon
+City Of Carcar
+City Of Catbalogan
+City Of Cauayan
+City Of Dasmariñas
+City Of Digos
+City Of El Salvador
+City Of Escalante
+City Of Gapan
+City Of Guihulngan
+City Of Himamaylan
+City Of Isabela
+City Of Kabankalan
+City Of Kidapawan
+City Of Koronadal
+City Of Lamitan
+City Of Las Piñas
+City Of Ligao
+City Of Maasin
+City Of Makati
+City Of Malabon
+City Of Malaybalay
+City Of Malolos
+City Of Mandaluyong
+City Of Marikina
+City Of Masbate
+City Of Mati
+City Of Meycauayan
+City Of Muntinlupa
+City Of Naga
+City Of Navotas
+City Of Panabo
+City Of Parañaque
+City Of Pasig
+City Of Passi
+City Of San Fernando
+City Of San Jose Del Monte
+City Of San Juan
+City Of San Pedro
+City Of Santa Rosa
+City Of Santiago
+City Of Sipalay
+City Of Sorsogon
+City Of Tabaco
+City Of Tabuk
+City Of Tacurong
+City Of Tagum
+City Of Talisay
+City Of Tanauan
+City Of Tandag
+City Of Tanjay
+City Of Tarlac
+City Of Tayabas
+City Of Urdaneta
+City Of Valencia
+City Of Valenzuela
+City Of Victorias
+City Of Vigan
+Cotabato City
+Danao City
+Dapitan City
+Datu Abdullah Sangki
+Datu Anggal Midtimbang
+Datu Blah T. Sinsuat
+Datu Hoffer Ampatuan
+Datu Odin Sinsuat
+Datu Paglas
+Datu Piang
+Datu Salibo
+Datu Saudi-Ampatuan
+Datu Unsay
+Davao City
+Del Carmen
+Del Gallego
+Delfin Albano
+Dipolog City
+Don Carlos
+Don Marcelino
+Don Victoriano Chiongbian
+Doña Remedios Trinidad
+Dumaguete City
+Dupax Del Norte
+Dupax Del Sur
+El Nido
+Enrique B. Magalona
+Enrique Villanueva
+Garcia Hernandez
+Gen. Mariano Alvarez
+Gen. S. K. Pendatun
+General Emilio Aguinaldo
+General Luna
+General Macarthur
+General Mamerto Natividad
+General Nakar
+General Santos City
+General Tinio
+General Trias
+Gingoog City
+Governor Generoso
+Gregorio Del Pilar
+Hadji Mohammad Ajul
+Hadji Muhtamad
+Hadji Panglima Tahil
+Ilagan City
+Iligan City
+Iloilo City
+Imus City
+Impasug-Ong
+Island Garden City Of Samal
+Jose Abad Santos
+Jose Dalman
+Jose Panganiban
+Kalingalan Caluang
+La Carlota City
+La Castellana
+La Libertad
+La Paz
+La Trinidad
+Lake Sebu
+Laoag City
+Lapu-Lapu City
+Las Navas
+Las Nieves
+Legazpi City
+Lipa City
+Lope De Vega
+Lopez Jaena
+Los Baños
+Lucena City
+Lumba-Bayabao
+Lumbaca-Unayan
+Mabalacat City
+Maria Aurora
+Manolo Fortich
+Mandaue City
+Marawi City
+Mataasnakahoy
+M'Lang
+Ma-Ayon
+Moises Padilla
+Naga City
+New Bataan
+New Corella
+New Lucena
+New Washington
+Northern Kabuntalan
+Nueva Era
+Nueva Valencia
+Olongapo City
+Ormoc City
+Oroquieta City
+Ozamiz City
+Padre Burgos
+Padre Garcia
+Pagadian City
+Palayan City
+Panglima Estino
+Panglima Sugala
+Pantao Ragat
+Pasay City
+Pio Duran
+Pio V. Corpuz
+Poona Bayabao
+Poona Piagapo
+Port Area
+Pres. Carlos P. Garcia
+Pres. Manuel A. Roxas
+President Quirino
+President Roxas
+Puerto Galera
+Puerto Princesa City
+Quezon City
+Rajah Buayan
+Ramon Magsaysay
+Reina Mercedes
+Remedios T. Romualdez
+Roseller Lim
+Roxas City
+Sagay City
+Saint Bernard
+Salvador Benedicto
+San Agustin
+San Andres
+San Antonio
+San Benito
+San Carlos City
+San Clemente
+San Dionisio
+San Emilio
+San Enrique
+San Esteban
+San Fabian
+San Felipe
+San Fernando
+San Francisco
+San Gabriel
+San Guillermo
+San Ildefonso
+San Isidro
+San Jacinto
+San Joaquin
+San Jorge
+San Jose
+San Jose City
+San Jose De Buan
+San Juan
+San Julian
+San Leonardo
+San Lorenzo
+San Lorenzo Ruiz
+San Luis
+San Manuel
+San Marcelino
+San Mariano
+San Mateo
+San Miguel
+San Narciso
+San Nicolas
+San Pablo
+San Pablo City
+San Pascual
+San Policarpo
+San Quintin
+San Rafael
+San Remigio
+San Ricardo
+San Roque
+San Sebastian
+San Simon
+San Teodoro
+San Vicente
+Santa Ana
+Santa Barbara
+Santa Catalina
+Santa Cruz
+Santa Elena
+Santa Fe
+Santa Ignacia
+Santa Josefa
+Santa Lucia
+Santa Magdalena
+Santa Marcela
+Santa Margarita
+Santa Maria
+Santa Monica
+Santa Praxedes
+Santa Rita
+Santa Rosa
+Santa Teresita
+Santo Domingo
+Santo Niño
+Santo Tomas
+Sapang Dalaga
+Science City Of Muñoz
+Sen. Ninoy Aquino
+Sergio Osmeña Sr.
+Shariff Aguak
+Shariff Saydona Mustapha
+Sierra Bullones
+Silay City
+Silvino Lobos
+Sofronio Española
+South Ubian
+South Upi
+Sultan Dumalondong
+Sultan Kudarat
+Sultan Mastura
+Sultan Naga Dimaporo
+Sultan Sa Barongis
+Surigao City
+T'Boli
+Tacloban City
+Tagaytay City
+Tagbilaran City
+Tagoloan II
+Taguig City
+Tomas Oppus
+Tondo I / II
+Trece Martires City
+Turtle Islands
+Ungkaya Pukan
+Vincenzo A. Sagun
+Zamboanga City
