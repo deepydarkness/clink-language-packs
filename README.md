@@ -4,7 +4,7 @@
 
 <h1 align="center">Clink Philippine Language Packs</h1>
 
-<p align="center">Community language packs for Filipino users of Clink.</p>
+<p align="center">Opinionated community language packs for Filipino users of Clink.</p>
 
 This repository provides additional language packs for [Clink](https://github.com/anti-ltd/clink), with a focus on languages commonly spoken in the Philippines.
 
@@ -15,18 +15,17 @@ The goal is to make useful Filipino-language dictionaries available for Clink, i
 | Language    | Code  | Status      |
 | ----------- | ----- | ----------- |
 | Cebuano     | `ceb` | ✅ Available |
+| Filipino     | `fil` | ✅ Available |
 
 More Philippine languages and regional varieties may be added over time.
 
-## Cebuano
+## Structure
 
-The current language pack is **Cebuano (`ceb`)**.
-
-The Cebuano dictionary is built from multiple word lists, separated by type:
+Each dictionary in this repo is built from multiple word lists, separated by type:
 
 ```text
 source/
-└── ceb/
+└── fil/
     ├── standard.txt
     ├── colloquial.txt
     ├── slang.txt
@@ -40,12 +39,12 @@ This makes it easy to add or modify vocabulary without manually editing the comp
 
 ### Vocabulary categories
 
-* **Standard** — commonly accepted Cebuano vocabulary
+* **Standard** — commonly accepted vocabulary
 * **Colloquial** — informal words and expressions commonly used in everyday speech
 * **Slang** — highly informal or non-standard expressions
 * **Shortcuts** — common shortened forms and typing conventions used in chats and messages
 
-The dictionary may therefore contain words that are not found in formal dictionaries but are commonly used when typing Cebuano.
+The dictionary may therefore contain words that are not found in formal dictionaries but are commonly used when typing.
 
 ## Building a Language Pack
 
