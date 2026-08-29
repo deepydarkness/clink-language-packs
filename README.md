@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="https://github.com/anti-ltd/clink-index" width="96" alt="Clink app icon">
+  <img src="images/Clink-PH.jpg" width="96" alt="Clink app icon">
 </p>
 
 <h1 align="center">Clink Philippine Language Packs</h1>
 
 <p align="center">Opinionated community language packs for Filipino users of Clink.</p>
 
-This repository provides additional language packs for [Clink](https://github.com/anti-ltd/clink), with a focus on languages commonly spoken in the Philippines.
+This repository provides additional language packs for [Clink](https://github.com/anti-ltd/clink-index), with a focus on languages commonly spoken in the Philippines.
 
 The goal is to provide useful language data that reflects how people actually type, including **standard vocabulary, everyday language, slang, common typing shortcuts, and next-word prediction**.
 
