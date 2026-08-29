@@ -16,3 +16,5 @@ sge2
 cge2
 ngi
 nge
+sha
+mana
