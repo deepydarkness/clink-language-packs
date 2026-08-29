@@ -16,6 +16,7 @@ The goal is to provide language data that reflects how people actually type, inc
 |---|---|---|
 | Cebuano | `ceb` | ✅ Available |
 | Filipino | `fil` | ✅ Available |
+| Hiligaynon | `hil` | ✅ Available |
 
 More Philippine languages and regional varieties will be added over time.
 
