@@ -6,3 +6,4 @@ lng
 ngita
 nahan
 buot2
+musta

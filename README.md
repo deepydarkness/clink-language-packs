@@ -4,11 +4,11 @@
 
 <h1 align="center">Clink Philippine Language Packs</h1>
 
-<p align="center"> (Opinionated) community language packs for Filipino users of Clink.</p>
+<p align="center">Opinionated community language packs for Filipino users of Clink.</p>
 
 This repository provides additional language packs for [Clink](https://github.com/anti-ltd/clink), with a focus on languages commonly spoken in the Philippines.
 
-The goal is to provide useful dictionaries that reflect how people actually type, including **standard vocabulary, everyday language, slang, and common typing shortcuts**.
+The goal is to provide useful language data that reflects how people actually type, including **standard vocabulary, everyday language, slang, common typing shortcuts, and next-word prediction**.
 
 ## Supported Languages
 
@@ -32,34 +32,45 @@ source/
 │   ├── standard.txt
 │   ├── colloquial.txt
 │   ├── slang.txt
-│   └── shortcuts.txt
+│   ├── shortcuts.txt
+│   └── sentences.txt
 │
 └── fil/
     ├── standard.txt
     ├── colloquial.txt
     ├── slang.txt
-    └── shortcuts.txt
+    ├── shortcuts.txt
+    └── sentences.txt
 ```
 
-Each file contains **one word per line**.
+Dictionary files contain **one word per line**. `sentences.txt` is different: it contains **one complete sentence per line** and is used to build the next-word prediction model.
 
-When a language is built, all of its word lists are combined with the shared Philippine `proper-nouns.txt` list. The build process then **removes duplicates, sorts the words, and generates the Clink `.clex` dictionary**.
+When a language is built, its dictionary word lists are combined with the shared Philippine `proper-nouns.txt` list. The build process then **removes duplicates, sorts the words, and generates the Clink `.clex` dictionary**.
+
+If `sentences.txt` is present, it is also used to generate the language's `.cngm` next-word prediction model.
 
 For example:
 
 ```text
-source/ceb/*.txt
-        +
+source/ceb/
+├── standard.txt
+├── colloquial.txt
+├── slang.txt
+├── shortcuts.txt
+└── sentences.txt
+
 source/ph/proper-nouns.txt
         ↓
-  deduplicate
+  combine word lists
         ↓
-     sort
+  deduplicate + sort
         ↓
-Lexicons/ceb.clex
+   ┌────┴────┐
+   ↓         ↓
+ceb.clex   ceb.cngm
 ```
 
-This keeps the source vocabulary easy to edit while avoiding duplication between Philippine language packs.
+This keeps the source data easy to edit while avoiding duplication between Philippine language packs.
 
 ### Vocabulary categories
 
@@ -107,14 +118,15 @@ python build-language.py ceb
 
 The script automatically:
 
-1. Reads all `.txt` files in `source/ceb/`
+1. Reads the dictionary word lists in `source/ceb/`
 2. Adds the shared `source/ph/proper-nouns.txt`
 3. Removes duplicate words
 4. Sorts the combined word list
 5. Generates `Lexicons/ceb.clex`
-6. Validates the resulting pack
+6. Builds `Lexicons/ceb.cngm` if `source/ceb/sentences.txt` exists
+7. Validates the resulting pack
 
-The generated `.clex` file should **not** be edited manually.
+The generated `.clex` and `.cngm` files should **not** be edited manually.
 
 You can also validate the pack separately:
 
@@ -132,8 +144,11 @@ source/
     ├── standard.txt
     ├── colloquial.txt
     ├── slang.txt
-    └── shortcuts.txt
+    ├── shortcuts.txt
+    └── sentences.txt
 ```
+
+The `sentences.txt` file is optional. If provided, it should contain one complete sentence per line and will be used for next-word prediction.
 
 Then build it with:
 
@@ -141,13 +156,15 @@ Then build it with:
 python build-language.py ilo
 ```
 
-The resulting dictionary will be:
+The resulting files will be:
 
 ```text
-Lexicons/ilo.clex
+Lexicons/
+├── ilo.clex
+└── ilo.cngm
 ```
 
-The shared Philippine proper-noun list will automatically be included.
+The shared Philippine proper-noun list will automatically be included in the dictionary.
 
 ## Contributing Vocabulary
 
@@ -169,11 +186,55 @@ When possible, prefer words that are actually used by speakers rather than mecha
 
 ## Next-Word Prediction
 
-The current language packs primarily provide dictionary data.
+A dictionary knows individual words. A next-word model learns relationships between words based on real sentences.
 
-The `.clex` dictionary contains words that Clink can recognize and suggest, but **the word lists themselves do not provide next-word prediction data**.
+For example, a model may learn that after:
 
-Next-word prediction can be added separately in the future using a sentence corpus.
+```text
+Ganahan ko
+```
+
+the next word is more likely to be:
+
+```text
+mokaon
+```
+
+than an unrelated word.
+
+Next-word prediction requires a **sentence corpus**, not a list of individual words.
+
+To add one, create:
+
+```text
+source/ceb/sentences.txt
+```
+
+and put one complete sentence on each line:
+
+```text
+Moadto ko sa Cebu ugma.
+Ganahan ko mokaon ug Jollibee.
+Asa ka padulong?
+Unsa imong gibuhat?
+Murag ulan karon.
+```
+
+Then simply run:
+
+```bash
+python build-language.py ceb
+```
+
+The build script automatically uses the combined dictionary and `sentences.txt` to generate:
+
+```text
+Lexicons/ceb.cngm
+```
+
+The next-word model only uses words that are present in the language's dictionary, keeping the model consistent with the `.clex` file.
+
+Use sentence data that you are legally allowed to redistribute or process. Larger and more varied collections of natural sentences generally produce better predictions.
 
 ## License
 
