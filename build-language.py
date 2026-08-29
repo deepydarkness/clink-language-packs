@@ -3,12 +3,12 @@
 import pathlib
 import subprocess
 import sys
-import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SOURCE = ROOT / "source"
 SHARED = SOURCE / "ph" / "proper-nouns.txt"
 BUILD_PACK = ROOT / "build-pack.py"
+BUILD_NEXT_WORD = ROOT / "tools" / "build-next-word.py"
 VALIDATE_PACK = ROOT / "tools" / "validate-pack.py"
 
 
@@ -18,17 +18,23 @@ def main():
 
     code = sys.argv[1]
     language_dir = SOURCE / code
+    sentence_file = language_dir / "sentences.txt"
 
     if not language_dir.is_dir():
         raise SystemExit(f"source directory not found: {language_dir}")
 
-    txt_files = sorted(language_dir.glob("*.txt"))
-
-    if not txt_files:
-        raise SystemExit(f"no .txt source files found in {language_dir}")
-
     if not SHARED.is_file():
         raise SystemExit(f"shared proper-nouns file not found: {SHARED}")
+
+    # Only use dictionary word lists.
+    # sentences.txt is reserved for next-word prediction.
+    txt_files = sorted(
+        path for path in language_dir.glob("*.txt")
+        if path.name != "sentences.txt"
+    )
+
+    if not txt_files:
+        raise SystemExit(f"no dictionary .txt files found in {language_dir}")
 
     words = set()
 
@@ -37,14 +43,14 @@ def main():
         with path.open(encoding="utf-8") as f:
             for line in f:
                 word = line.strip()
-                if word:
+                if word and not word.startswith("#"):
                     words.add(word)
 
     # Read shared Philippine proper nouns.
     with SHARED.open(encoding="utf-8") as f:
         for line in f:
             word = line.strip()
-            if word:
+            if word and not word.startswith("#"):
                 words.add(word)
 
     # Sort the final combined dictionary.
@@ -60,19 +66,42 @@ def main():
         )
 
         print(f"Language: {code}")
-        print(f"Language sources: {len(txt_files)}")
+        print(f"Dictionary sources: {len(txt_files)}")
         print(f"Shared source: {SHARED}")
         print(f"Unique words: {len(combined)}")
         print()
 
         # Build CLEX.
+        print("Building CLEX...")
         subprocess.run(
             [sys.executable, str(BUILD_PACK), code, str(temp_source)],
             cwd=ROOT,
             check=True
         )
 
-        # Validate CLEX.
+        # Build next-word model if sentences.txt exists.
+        if sentence_file.is_file():
+            print()
+            print(f"Building next-word model from: {sentence_file}")
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(BUILD_NEXT_WORD),
+                    code,
+                    str(temp_source),
+                    str(sentence_file),
+                ],
+                cwd=ROOT,
+                check=True
+            )
+        else:
+            print()
+            print(f"No sentences.txt found; skipping next-word model.")
+
+        # Validate everything.
+        print()
+        print("Validating pack...")
         subprocess.run(
             [sys.executable, str(VALIDATE_PACK), code],
             cwd=ROOT,

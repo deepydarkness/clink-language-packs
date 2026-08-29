@@ -4,51 +4,100 @@
 
 <h1 align="center">Clink Philippine Language Packs</h1>
 
-<p align="center">Opinionated community language packs for Filipino users of Clink.</p>
+<p align="center"> (Opinionated) community language packs for Filipino users of Clink.</p>
 
 This repository provides additional language packs for [Clink](https://github.com/anti-ltd/clink), with a focus on languages commonly spoken in the Philippines.
 
-The goal is to make useful Filipino-language dictionaries available for Clink, including both **standard vocabulary** and **common everyday usage** that people actually type.
+The goal is to provide useful dictionaries that reflect how people actually type, including **standard vocabulary, everyday language, slang, and common typing shortcuts**.
 
 ## Supported Languages
 
-| Language    | Code  | Status      |
-| ----------- | ----- | ----------- |
-| Cebuano     | `ceb` | ✅ Available |
-| Filipino     | `fil` | ✅ Available |
+| Language | Code  | Status      |
+| -------- | ----- | ----------- |
+| Cebuano  | `ceb` | ✅ Available |
+| Filipino | `fil` | ✅ Available |
 
-More Philippine languages and regional varieties may be added over time.
+More Philippine languages and regional varieties will be added over time.
 
 ## Structure
 
-Each dictionary in this repo is built from multiple word lists, separated by type:
+Each language is built from multiple word lists separated by vocabulary type:
 
 ```text
 source/
+├── ph/
+│   └── proper-nouns.txt
+│
+├── ceb/
+│   ├── standard.txt
+│   ├── colloquial.txt
+│   ├── slang.txt
+│   └── shortcuts.txt
+│
 └── fil/
     ├── standard.txt
     ├── colloquial.txt
     ├── slang.txt
-    ├── shortcuts.txt
-    └── proper-nouns.txt
+    └── shortcuts.txt
 ```
 
-Each file contains **one word per line**. The build process combines the lists, removes duplicates, sorts the words, and generates the Clink `.clex` dictionary.
+Each file contains **one word per line**.
 
-This makes it easy to add or modify vocabulary without manually editing the compiled `.clex` file.
+When a language is built, all of its word lists are combined with the shared Philippine `proper-nouns.txt` list. The build process then **removes duplicates, sorts the words, and generates the Clink `.clex` dictionary**.
+
+For example:
+
+```text
+source/ceb/*.txt
+        +
+source/ph/proper-nouns.txt
+        ↓
+  deduplicate
+        ↓
+     sort
+        ↓
+Lexicons/ceb.clex
+```
+
+This keeps the source vocabulary easy to edit while avoiding duplication between Philippine language packs.
 
 ### Vocabulary categories
 
 * **Standard** — commonly accepted vocabulary
 * **Colloquial** — informal words and expressions commonly used in everyday speech
 * **Slang** — highly informal or non-standard expressions
-* **Shortcuts** — common shortened forms and typing conventions used in chats and messages
+* **Shortcuts** — shortened forms and typing conventions commonly used in chats and messages
+* **Proper nouns** — names of places, people, organizations, brands, institutions, and other named entities commonly used in the Philippines
 
 The dictionary may therefore contain words that are not found in formal dictionaries but are commonly used when typing.
 
+## Shared Philippine Proper Nouns
+
+`source/ph/proper-nouns.txt` contains proper nouns that are useful across multiple Philippine language packs.
+
+Examples include:
+
+```text
+Cebu
+Manila
+Davao
+Mindanao
+Visayas
+Luzon
+Jollibee
+McDo
+Ayala
+Globe
+PLDT
+```
+
+These words do not need to be duplicated in every language's source files. When a language pack is built, the shared proper-noun list is automatically included in its `.clex` dictionary.
+
+Keep this list focused on **widely recognizable Philippine proper nouns** rather than ordinary vocabulary.
+
 ## Building a Language Pack
 
-Language packs can be built from multiple word-list files.
+Language packs are built using `build-language.py`.
 
 For example:
 
@@ -56,15 +105,18 @@ For example:
 python build-language.py ceb
 ```
 
-This combines the files in `source/ceb/`, removes duplicate words, sorts them, and generates:
+The script automatically:
 
-```text
-Lexicons/ceb.clex
-```
+1. Reads all `.txt` files in `source/ceb/`
+2. Adds the shared `source/ph/proper-nouns.txt`
+3. Removes duplicate words
+4. Sorts the combined word list
+5. Generates `Lexicons/ceb.clex`
+6. Validates the resulting pack
 
-The generated `.clex` file should not be edited manually.
+The generated `.clex` file should **not** be edited manually.
 
-After building, validate the pack:
+You can also validate the pack separately:
 
 ```bash
 python tools/validate-pack.py ceb
@@ -80,8 +132,7 @@ source/
     ├── standard.txt
     ├── colloquial.txt
     ├── slang.txt
-    ├── shortcuts.txt
-    └── proper-nouns.txt
+    └── shortcuts.txt
 ```
 
 Then build it with:
@@ -95,6 +146,8 @@ The resulting dictionary will be:
 ```text
 Lexicons/ilo.clex
 ```
+
+The shared Philippine proper-noun list will automatically be included.
 
 ## Contributing Vocabulary
 
@@ -111,6 +164,8 @@ Formal dictionary words are useful, but everyday typing may also include:
 * common shortcuts such as `dli`, `nman`, `lng`, and `sya`
 
 These should generally be kept in the appropriate **colloquial, slang, or shortcuts** word list rather than mixed into the standard vocabulary.
+
+When possible, prefer words that are actually used by speakers rather than mechanically generated or translated vocabulary.
 
 ## Next-Word Prediction
 
