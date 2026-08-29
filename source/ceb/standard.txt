@@ -9479,6 +9479,7 @@ luwas
 luwat
 luy-a
 luya
+luyo
 luyang
 luyat
 luyluy
@@ -16624,7 +16625,6 @@ ginabas
 palochina
 pino
 grabe
-grabeha
 ilang
 inyong
 iyang
