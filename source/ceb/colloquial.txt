@@ -65,3 +65,5 @@ ngohiong
 lumpia
 tikoy
 lechon
+duwa
+byahe
