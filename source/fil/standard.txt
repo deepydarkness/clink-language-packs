@@ -18007,7 +18007,7 @@ magkakambal
 magkakampi
 magkakamukha
 magkakandila
-Magkakano?
+magkakano
 magkakanser
 magkakapanahon
 magkakapantay
@@ -18114,7 +18114,6 @@ magkangipin
 magkani-kaniya
 magkanlong
 Magkano
-Magkano?
 magkanonisa
 magkansela
 magkanugnog
@@ -24691,7 +24690,6 @@ nahahawig
 nahalal
 nahalina
 nahalit
-Nahan?
 nahawa
 nahawan
 nahayag
