@@ -27,7 +27,6 @@ nawa
 nakalimot
 kalimtanon
 muari
-sya
 hapita
 bataa
 gamaya
@@ -40,3 +39,8 @@ nah
 sah
 beh
 bi
+mu
+mo
+saman
+samana
+grabi
