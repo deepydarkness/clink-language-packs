@@ -28,4 +28,3 @@ kas
 pas
 asay
 way
-d.i.
