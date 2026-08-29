@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
 import pathlib
+import shutil
 import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SOURCE = ROOT / "source"
-
-SHARED_PROPER_NOUNS = SOURCE / "ph" / "proper-nouns.txt"
-SHARED_SENTENCES = SOURCE / "ph" / "sentences.txt"
-
+SHARED = SOURCE / "ph" / "proper-nouns.txt"
 BUILD_PACK = ROOT / "build-pack.py"
 BUILD_NEXT_WORD = ROOT / "tools" / "build-next-word.py"
 VALIDATE_PACK = ROOT / "tools" / "validate-pack.py"
@@ -21,22 +19,10 @@ def read_words(path):
     with path.open(encoding="utf-8") as f:
         for line in f:
             word = line.strip()
-            if word:
+            if word and not word.startswith("#"):
                 words.add(word)
 
     return words
-
-
-def read_sentences(path):
-    if not path.is_file():
-        return []
-
-    with path.open(encoding="utf-8") as f:
-        return [
-            line.rstrip()
-            for line in f
-            if line.strip()
-        ]
 
 
 def main():
@@ -49,59 +35,33 @@ def main():
     if not language_dir.is_dir():
         raise SystemExit(f"source directory not found: {language_dir}")
 
-    # ------------------------------------------------------------
-    # Dictionary
-    # ------------------------------------------------------------
-
     txt_files = sorted(
         path for path in language_dir.glob("*.txt")
         if path.name != "sentences.txt"
     )
 
     if not txt_files:
-        raise SystemExit(f"no dictionary source files found in {language_dir}")
+        raise SystemExit(f"no dictionary .txt source files found in {language_dir}")
 
-    if not SHARED_PROPER_NOUNS.is_file():
-        raise SystemExit(
-            f"shared proper-nouns file not found: {SHARED_PROPER_NOUNS}"
-        )
+    if not SHARED.is_file():
+        raise SystemExit(f"shared proper-nouns file not found: {SHARED}")
 
     words = set()
 
-    # Language-specific word lists.
+    # Read language-specific dictionary word lists.
     for path in txt_files:
         words.update(read_words(path))
 
-    # Shared Philippine proper nouns.
-    words.update(read_words(SHARED_PROPER_NOUNS))
+    # Read shared Philippine proper nouns.
+    words.update(read_words(SHARED))
 
-    # Sort the final dictionary.
+    # Sort the final combined dictionary.
     combined = sorted(words, key=str.casefold)
 
-    # Temporary combined dictionary source.
+    # Temporary combined source file.
     temp_source = SOURCE / f".{code}.combined.txt"
 
-    # ------------------------------------------------------------
-    # Next-word corpus
-    # ------------------------------------------------------------
-
-    language_sentences = SOURCE / code / "sentences.txt"
-
-    sentence_sources = []
-
-    if language_sentences.is_file():
-        sentence_sources.append(language_sentences)
-
-    if SHARED_SENTENCES.is_file():
-        sentence_sources.append(SHARED_SENTENCES)
-
-    temp_sentences = SOURCE / f".{code}.combined.sentences.txt"
-
     try:
-        # --------------------------------------------------------
-        # Write combined dictionary
-        # --------------------------------------------------------
-
         temp_source.write_text(
             "\n".join(combined) + "\n",
             encoding="utf-8"
@@ -109,16 +69,12 @@ def main():
 
         print(f"Language: {code}")
         print(f"Dictionary sources: {len(txt_files)}")
-        print(f"Shared proper nouns: {SHARED_PROPER_NOUNS}")
-        print(f"Unique words: {len(combined)}")
+        print(f"Shared proper nouns: {SHARED}")
+        print(f"Unique words: {len(combined):,}")
         print()
 
-        # --------------------------------------------------------
-        # Build CLEX
-        # --------------------------------------------------------
-
+        # Build CLEX.
         print("Building dictionary...")
-
         subprocess.run(
             [
                 sys.executable,
@@ -130,30 +86,13 @@ def main():
             check=True
         )
 
-        print()
+        # Build next-word model if sentences.txt exists.
+        sentences = language_dir / "sentences.txt"
 
-        # --------------------------------------------------------
-        # Build CNGM if sentence data exists
-        # --------------------------------------------------------
-
-        if sentence_sources:
-            sentences = []
-
-            for path in sentence_sources:
-                sentences.extend(read_sentences(path))
-
-            # Remove duplicate sentences while preserving order.
-            sentences = list(dict.fromkeys(sentences))
-
-            temp_sentences.write_text(
-                "\n".join(sentences) + "\n",
-                encoding="utf-8"
-            )
-
-            print("Building next-word model...")
-            print(f"Sentence sources: {len(sentence_sources)}")
-            print(f"Unique sentences: {len(sentences)}")
+        if sentences.is_file():
             print()
+            print("Building next-word model...")
+            print("Sentence source:", sentences)
 
             subprocess.run(
                 [
@@ -161,21 +100,36 @@ def main():
                     str(BUILD_NEXT_WORD),
                     code,
                     str(temp_source),
-                    str(temp_sentences)
+                    str(sentences)
                 ],
                 cwd=ROOT,
                 check=True
             )
-
         else:
-            print("No sentence corpus found.")
-            print("Skipping next-word model.")
             print()
+            print("No sentences.txt found; skipping next-word model.")
 
-        # --------------------------------------------------------
-        # Validate
-        # --------------------------------------------------------
+        # Copy emoji metadata if present.
+        emoji_source = language_dir / "emoji.json"
+        emoji_destination = ROOT / "Lexicons" / f"{code}.emoji.json"
 
+        if emoji_source.is_file():
+            print()
+            print("Copying emoji metadata...")
+
+            emoji_destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(emoji_source, emoji_destination)
+
+            print(f"Copied {emoji_destination}")
+        else:
+            # Remove an old generated emoji file if the source was deleted.
+            if emoji_destination.exists():
+                emoji_destination.unlink()
+                print()
+                print(f"Removed {emoji_destination}")
+
+        # Validate everything.
+        print()
         print("Validating pack...")
 
         subprocess.run(
@@ -192,12 +146,8 @@ def main():
         print(f"✓ {code} build complete.")
 
     finally:
-        # Clean temporary files.
         if temp_source.exists():
             temp_source.unlink()
-
-        if temp_sentences.exists():
-            temp_sentences.unlink()
 
 
 if __name__ == "__main__":
