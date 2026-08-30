@@ -4,7 +4,7 @@
 
 <h1 align="center">Clink Philippine Language Packs</h1>
 
-<p align="center">Opinionated community language packs for Filipino users of Clink.</p>
+<p align="center">Opinionated Philippine language packs for the highly customizable Clink iOS keyboard.</p>
 
 This repository provides additional language packs for [Clink](https://github.com/anti-ltd/clink-index), focusing on languages commonly spoken in the Philippines.
 
@@ -19,6 +19,8 @@ The goal is to provide language data that reflects how people actually type, inc
 | Hiligaynon | `hil` | ✅ Available |
 
 More Philippine languages and regional varieties will be added over time.
+
+Disclaimer: I am a native **Cebuano** speaker and so it is possible that I might get other Philippine languages wrong. You are welcome to submit pull requests to fix any mistakes.
 
 ## What makes these packs different?
 
