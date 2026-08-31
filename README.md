@@ -20,7 +20,7 @@ The goal is to provide language data that reflects how people actually type, inc
 
 More Philippine languages and regional varieties will be added over time.
 
-Disclaimer: I am a native **Cebuano** speaker and so it is possible that I might get other Philippine languages wrong. You are welcome to submit pull requests to fix any mistakes.
+Disclaimer: My native language is **Cebuano** and so it is possible that I might get other Philippine languages wrong. You are welcome to submit pull requests to fix any mistakes.
 
 ## What makes these packs different?
 
